@@ -12,3 +12,4 @@ O objetivo é automatizar o processo de build, testes e análise estática sempr
 - ✅ Execução de testes automatizados com `go test`
 - ✅ Análise de código com `golint` (opcional)
 - ✅ Execução da pipeline em pull requests e push na branch `main`
+- ✅ Integração com Discord via WebHook

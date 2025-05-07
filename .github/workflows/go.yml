@@ -14,14 +14,15 @@ jobs:
   ci:
     runs-on: ubuntu-latest
     steps:
-    - uses: actions/checkout@v4
+    - name: Code checkout 
+      uses: actions/checkout@v4
 
     - name: Set up Go
       uses: actions/setup-go@v4
       with:
         go-version: '1.22'
 
-    - name: Inicia Banco
+    - name: Initializing Database
       run: docker compose up -d postgres
 
     - name: Lint
@@ -36,8 +37,22 @@ jobs:
     - name: Build
       run: go build main.go
 
-    - name: Projeto Compilado
+    - name: Compiled Project
       uses: actions/upload-artifact@v4
       with:
-        name: projeto_compilado
+        name: compiled_project
         path: main
+    
+    - name: Notify Discord about Artifact
+      env:
+        DISCORD_WEBHOOK: ${{secrets.DISCORD_WEBHOOK}}
+      run: |
+          ARTIFACT_NAME: "compiled_project"
+          BUILD_DATE=$(date -u +"%Y-%m-%d %H:%M:%S UTC")
+    
+          curl -H "Content-Type: application/json" \
+            -X POST \
+             -d "{
+                \"content\": \"✅ **Artefato Gerado**\n🧱 Nome: \`${ARTIFACT_NAME}\`\n📅 Data: ${BUILD_DATE}\n👤 Por: **${{ github.actor }}**\n🔗 [View Build](${{ github.server_url }}/${{ github.repository }}/actions/runs/${{ github.run_id }})\"
+              }" \
+            $DISCORD_WEBHOOK

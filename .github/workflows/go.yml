@@ -47,7 +47,7 @@ jobs:
       env:
         DISCORD_WEBHOOK: ${{secrets.DISCORD_WEBHOOK}}
       run: |
-          ARTIFACT_NAME: "compiled_project"
+          ARTIFACT_NAME= "compiled_project"
           BUILD_DATE=$(date -u +"%Y-%m-%d %H:%M:%S UTC")
     
           curl -H "Content-Type: application/json" \

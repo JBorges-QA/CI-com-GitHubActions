@@ -21,7 +21,7 @@ jobs:
         go-version: '1.22'
 
     - name: Initializing Database
-      run: docker compose up -d postgres
+      run: docker compose up -d
 
     - name: Lint
       uses: golangci/golangci-lint-action@v7

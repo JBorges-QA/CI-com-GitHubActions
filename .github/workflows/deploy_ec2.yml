@@ -36,3 +36,18 @@ jobs:
           username: ${{ secrets.EC2_USERNAME}}
           key: ${{ secrets.EC2_SECRET_KEY }}
           script: sudo systemctl restart projeto
+
+    - name: Notify Discord about Artifact
+      env:
+        DISCORD_WEBHOOK: ${{secrets.DISCORD_WEBHOOK}}]
+      run: |
+          ARTIFACT_NAME="compiled_project"
+          BUILD_DATE=$(date -u +"%Y-%m-%d %H:%M:%S UTC")
+          URL="http://"+${{EC2_HOST}}+":8080"
+    
+          curl -H "Content-Type: application/json" \
+            -X POST \
+             -d "{
+                \"content\": \"✅ **Deploy realizado com sucesso na instância EC2**\n🧱 `\n Por: **${{ github.actor }}**\n🔗 [Acessar Aplicação](${{ URL }}"
+              }" \
+            $DISCORD_WEBHOOK

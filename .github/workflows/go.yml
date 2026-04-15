@@ -11,6 +11,7 @@ jobs:
 
   ci:
     runs-on: ubuntu-latest
+    environment: ci
     steps:
     - name: Code checkout 
       uses: actions/checkout@v4

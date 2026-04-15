@@ -6,9 +6,9 @@ start:
 	docker compose up -d
 ci: start lint test
 cd:
-	docker run --rm -itv $(CURDIR):/app -w /app golang:1.22-alpine go build main.go
-	scp -ri "~/.ssh/curso-cd-aws.pem" $(CURDIR)/templates ec2-user@ec2-3-16-152-33.us-east-2.compute.amazonaws.com:/home/ec2-user
-	scp -ri "~/.ssh/curso-cd-aws.pem" $(CURDIR)/assets ec2-user@ec2-3-16-152-33.us-east-2.compute.amazonaws.com:/home/ec2-user
-	scp -i "~/.ssh/curso-cd-aws.pem" $(CURDIR)/main ec2-user@ec2-3-16-152-33.us-east-2.compute.amazonaws.com:/home/ec2-user
+	#docker run --rm -itv $(CURDIR):/app -w /app golang:1.22-alpine go build main.go
+	#scp -ri "~/.ssh/curso-cd-aws.pem" $(CURDIR)/templates ec2-user@ec2-3-16-152-33.us-east-2.compute.amazonaws.com:/home/ec2-user
+	#scp -ri "~/.ssh/curso-cd-aws.pem" $(CURDIR)/assets ec2-user@ec2-3-16-152-33.us-east-2.compute.amazonaws.com:/home/ec2-user
+	#scp -i "~/.ssh/curso-cd-aws.pem" $(CURDIR)/main ec2-user@ec2-3-16-152-33.us-east-2.compute.amazonaws.com:/home/ec2-user
 	# Servidor de Prod
 	# ENV ./main
